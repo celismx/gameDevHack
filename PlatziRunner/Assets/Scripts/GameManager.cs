@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -10,12 +10,19 @@ public enum GameState
     inGame,
     inMiniGame,
     inGameOver,
+    inWin,
     inCredits
 }
 public class GameManager : MonoBehaviour
 {
     public GameState currentGameState = GameState.inMenu;
     public static GameManager sharedInstance;
+
+    public void ReloadLevel()
+    {
+        Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+        Time.timeScale = 1.0f;
+    }
 
     void Awake()
     {
@@ -63,6 +70,10 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.inMenu);
 
     }
+    public void Win()
+    {
+        SetGameState(GameState.inWin);
+    }
     private void SetGameState(GameState newGameState)
     {
         if(newGameState == GameState.inMenu)
@@ -86,6 +97,10 @@ public class GameManager : MonoBehaviour
             //TODO: HAy que preparar la escena del juego
         }
         else if (newGameState == GameState.inCredits)
+        {
+            //TODO: HAy que preparar la escena del juego
+        }
+        else if (newGameState == GameState.inWin)
         {
             //TODO: HAy que preparar la escena del juego
         }
