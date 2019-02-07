@@ -1,2 +1,3 @@
-# gameDevHack
-Platzi Runner
+# Platzi Runner
+
+Infiny Brayan The Game
