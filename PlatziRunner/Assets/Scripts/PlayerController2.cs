@@ -19,6 +19,10 @@ public class PlayerController2 : MonoBehaviour
     Rigidbody2D rigidBody;
     Animator animator;
 
+    //Variables de la vida del jugador
+    bool godMode = false;
+    int life = 3;
+
     const string STATE_ALIVE = "isAlive";
     const string STATE_ON_THE_GROUND = "isOnTheGround";
 
@@ -112,4 +116,24 @@ public class PlayerController2 : MonoBehaviour
         GameManager.sharedInstance.GameOver();
     }
 
+    public void Damage()
+    {
+        if (!godMode && life > 0)
+        {
+            life--;
+            godMode = true;
+            StartCoroutine(DisableGodMode());
+            Debug.Log("El jugador tiene " + life + " vidas.");
+            if(life <= 0)
+            {
+                Die();
+            }
+        }
+    }
+
+    IEnumerator DisableGodMode()
+    {
+        yield return new WaitForSeconds(2.0f);
+        godMode = false;
+    }
 }

@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour
     private float safeZone = 25f;
     private int lastTileIndex;
 
+    public GameObject panel_;
+
     private List<GameObject> activeTiles;
 
     // Use this for initialization
@@ -43,6 +45,11 @@ public class LevelManager : MonoBehaviour
         {
             SpawnTile();
             DeleteTile();
+        }
+
+        if(GameManager.sharedInstance.currentGameState == GameState.inWin)
+        {
+            panel_.SetActive(true);
         }
     }
 
